@@ -1,0 +1,153 @@
+<Window x:Class="ContentMigrator.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Content Migrator T2T - Community Edition" Height="880" Width="960" MinWidth="760" MinHeight="600"
+        WindowStartupLocation="CenterScreen" FontFamily="Segoe UI" FontSize="13"
+        Background="{StaticResource Brush.Window}" Foreground="{StaticResource Brush.Text}"
+        Icon="pack://application:,,,/Resources/AppIcon.ico">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Banner -->
+    <Border Grid.Row="0" Background="{StaticResource Brush.Surface}" BorderBrush="{StaticResource Brush.Accent}"
+            BorderThickness="0,0,0,2" Padding="16,12">
+      <DockPanel>
+        <Border DockPanel.Dock="Left" Background="White" CornerRadius="6" Padding="2" Margin="0,0,12,0"
+                VerticalAlignment="Center">
+          <Image Source="pack://application:,,,/Resources/AppIcon.png" Width="40" Height="40"
+                 RenderOptions.BitmapScalingMode="HighQuality"/>
+        </Border>
+        <StackPanel VerticalAlignment="Center">
+          <TextBlock FontSize="22" FontWeight="SemiBold">
+            <Run Text="Content Migrator T2T" Foreground="{StaticResource Brush.Highlight}"/>
+            <Run Text=" - Community Edition" Foreground="{StaticResource Brush.Text}"/>
+          </TextBlock>
+          <TextBlock x:Name="lblSubtitle" Text="List and Library migration utility" FontSize="12"
+                     Foreground="{StaticResource Brush.TextMuted}"/>
+        </StackPanel>
+      </DockPanel>
+    </Border>
+
+    <!-- Inputs -->
+    <Grid Grid.Row="1" Margin="16,14,16,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="190"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <TextBlock Grid.Row="0" Grid.Column="0" Text="Operation" VerticalAlignment="Center" Margin="0,5"/>
+      <ComboBox x:Name="cmbOperation" Grid.Row="0" Grid.Column="1" Height="30" Margin="0,5" SelectedIndex="0"
+                SelectionChanged="CmbOperation_SelectionChanged">
+        <ComboBoxItem Content="1) Inventory a library"/>
+        <ComboBoxItem Content="2) MOVE full library/folder to another library"/>
+        <ComboBoxItem Content="3) COPY full library/folder to another library"/>
+        <ComboBoxItem Content="4) MOVE content from CSV (preserve folders)"/>
+        <ComboBoxItem Content="5) COPY content from CSV (preserve folders)"/>
+        <ComboBoxItem Content="6) COPY list items to another list"/>
+        <ComboBoxItem Content="7) Retry failed file operations (from log)"/>
+        <ComboBoxItem Content="8) Generate CSV template"/>
+        <ComboBoxItem Content="9) Create destination from existing (schema/views)"/>
+        <ComboBoxItem Content="10) MODERNIZE a list (new modern list + columns + views + items)"/>
+      </ComboBox>
+
+      <TextBlock Grid.Row="1" Grid.Column="0" Text="Source site URL" VerticalAlignment="Center" Margin="0,5"/>
+      <TextBox x:Name="txtSourceSite" Grid.Row="1" Grid.Column="1" Height="30" VerticalContentAlignment="Center" Margin="0,5"
+               ToolTip="Full URL, or /sites/Name to use the tenant from Settings"/>
+
+      <TextBlock Grid.Row="2" Grid.Column="0" Text="Source list/library" VerticalAlignment="Center" Margin="0,5"/>
+      <TextBox x:Name="txtSourceList" Grid.Row="2" Grid.Column="1" Height="30" VerticalContentAlignment="Center" Margin="0,5"/>
+
+      <TextBlock Grid.Row="3" Grid.Column="0" Text="Destination site URL" VerticalAlignment="Center" Margin="0,5"/>
+      <TextBox x:Name="txtDestSite" Grid.Row="3" Grid.Column="1" Height="30" VerticalContentAlignment="Center" Margin="0,5"
+               ToolTip="Leave blank for the same site as the source"/>
+
+      <TextBlock Grid.Row="4" Grid.Column="0" Text="Destination tenant" VerticalAlignment="Center" Margin="0,5"/>
+      <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="0,5">
+        <CheckBox x:Name="chkCrossTenant" Content="Destination is in another tenant" VerticalAlignment="Center"
+                  Checked="ChkCrossTenant_Changed" Unchecked="ChkCrossTenant_Changed"
+                  ToolTip="Sign in to the tenant in Settings > Destination tenant for the destination site"/>
+        <TextBlock x:Name="lblDestTenant" Margin="14,0,0,0" VerticalAlignment="Center"
+                   Foreground="{StaticResource Brush.TextMuted}"/>
+      </StackPanel>
+
+      <TextBlock Grid.Row="5" Grid.Column="0" Text="Destination list/library" VerticalAlignment="Center" Margin="0,5"/>
+      <TextBox x:Name="txtDestList" Grid.Row="5" Grid.Column="1" Height="30" VerticalContentAlignment="Center" Margin="0,5"/>
+
+      <TextBlock Grid.Row="6" Grid.Column="0" Text="Destination root folder" VerticalAlignment="Center" Margin="0,5"/>
+      <TextBox x:Name="txtDestRoot" Grid.Row="6" Grid.Column="1" Height="30" VerticalContentAlignment="Center" Margin="0,5"/>
+
+      <TextBlock Grid.Row="7" Grid.Column="0" Text="CSV / log file" VerticalAlignment="Center" Margin="0,5"/>
+      <Grid Grid.Row="7" Grid.Column="1" Margin="0,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="txtCsvPath" Grid.Column="0" Height="30" VerticalContentAlignment="Center"/>
+        <Button x:Name="btnBrowseCsv" Grid.Column="1" Content="Browse..." Width="86" Height="30" Margin="6,0,0,0" Click="BtnBrowseCsv_Click"/>
+      </Grid>
+    </Grid>
+
+    <!-- Options -->
+    <WrapPanel Grid.Row="2" Margin="16,12,16,0">
+      <CheckBox x:Name="chkOverwrite" Content="Overwrite existing" Margin="0,0,20,8"/>
+      <CheckBox x:Name="chkPreserveMeta" Content="Preserve system metadata" Margin="0,0,20,8"/>
+      <CheckBox x:Name="chkCreateDest" Content="Create destination from source if missing" Margin="0,0,20,8"/>
+      <CheckBox x:Name="chkReviewOnly" Content="Provision review-only (save schema / plan columns, do not apply)" Margin="0,0,20,8"/>
+      <CheckBox x:Name="chkAdminConfirm" Content="I am a Site Collection Admin on both sites"
+                Foreground="{StaticResource Brush.Danger}" FontWeight="SemiBold" Margin="0,0,20,8"/>
+    </WrapPanel>
+
+    <!-- Buttons -->
+    <WrapPanel Grid.Row="3" Orientation="Horizontal" Margin="16,6,16,0">
+      <Button x:Name="btnRun" Content="Run" Width="110" Height="32" Style="{StaticResource AccentButton}" Click="BtnRun_Click"/>
+      <Button x:Name="btnCancel" Content="Cancel" Width="90" Height="32" Margin="8,0,0,0" IsEnabled="False" Click="BtnCancel_Click"/>
+      <Button x:Name="btnGenTemplate" Content="Generate CSV Template" Width="170" Height="32" Margin="8,0,0,0" Click="BtnGenTemplate_Click"/>
+      <Button x:Name="btnOpenFolder" Content="Open Output Folder" Width="150" Height="32" Margin="8,0,0,0" Click="BtnOpenFolder_Click"/>
+      <Button x:Name="btnClearLog" Content="Clear Log" Width="90" Height="32" Margin="8,0,0,0" Click="BtnClearLog_Click"/>
+      <Button x:Name="btnSettings" Content="Settings..." Width="100" Height="32" Margin="8,0,0,0" Click="BtnSettings_Click"/>
+    </WrapPanel>
+
+    <!-- Progress + status -->
+    <Grid Grid.Row="4" Margin="16,12,16,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <ProgressBar x:Name="pbProgress" Grid.Column="0" Height="16" Minimum="0" Maximum="100" Value="0"/>
+      <TextBlock x:Name="lblStatus" Grid.Column="1" Text="Idle" Margin="10,0,0,0" VerticalAlignment="Center" MinWidth="120"
+                 Foreground="{StaticResource Brush.TextMuted}"/>
+    </Grid>
+
+    <!-- Log -->
+    <TextBox x:Name="txtLog" Grid.Row="5" Margin="16,10,16,8" Padding="6,4"
+             Background="{StaticResource Brush.LogBackground}" Foreground="{StaticResource Brush.LogText}"
+             FontFamily="Consolas" FontSize="12"
+             IsReadOnly="True" VerticalContentAlignment="Top" TextAlignment="Left"
+             VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+             TextWrapping="NoWrap" AcceptsReturn="True"/>
+
+    <!-- Footer: which config file is in use -->
+    <Border Grid.Row="6" Background="{StaticResource Brush.Surface}" BorderBrush="{StaticResource Brush.Border}"
+            BorderThickness="0,1,0,0" Padding="16,5">
+      <TextBlock x:Name="lblConfig" FontSize="11" Foreground="{StaticResource Brush.TextMuted}" TextTrimming="CharacterEllipsis"/>
+    </Border>
+  </Grid>
+</Window>

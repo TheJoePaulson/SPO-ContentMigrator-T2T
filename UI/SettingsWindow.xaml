@@ -1,0 +1,32 @@
+<Window x:Class="ContentMigrator.UI.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings - Content Migrator T2T - Community Edition" Height="680" Width="780" MinWidth="620" MinHeight="460"
+        WindowStartupLocation="CenterOwner" FontFamily="Segoe UI" FontSize="13" ShowInTaskbar="False"
+        Background="{StaticResource Brush.Window}" Foreground="{StaticResource Brush.Text}"
+        Icon="pack://application:,,,/Resources/AppIcon.ico">
+  <DockPanel>
+    <Border DockPanel.Dock="Top" Background="{StaticResource Brush.Surface}" BorderBrush="{StaticResource Brush.Accent}"
+            BorderThickness="0,0,0,2" Padding="16,10">
+      <StackPanel>
+        <TextBlock Text="Settings" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource Brush.Highlight}"/>
+        <TextBlock x:Name="lblPath" FontSize="11" Foreground="{StaticResource Brush.TextMuted}" TextTrimming="CharacterEllipsis"/>
+      </StackPanel>
+    </Border>
+
+    <Border DockPanel.Dock="Bottom" Background="{StaticResource Brush.Surface}" BorderBrush="{StaticResource Brush.Border}"
+            BorderThickness="0,1,0,0" Padding="12,8">
+      <DockPanel LastChildFill="False">
+        <Button DockPanel.Dock="Left" Content="Open file in editor" Width="146" Height="30" Click="BtnOpenFile_Click"
+                ToolTip="Open appsettings.json in your default editor"/>
+        <Button DockPanel.Dock="Left" Content="Reload from file" Width="126" Height="30" Margin="8,0,0,0" Click="BtnReload_Click"/>
+        <Button DockPanel.Dock="Left" Content="Restore defaults" Width="126" Height="30" Margin="8,0,0,0" Click="BtnDefaults_Click"/>
+        <Button DockPanel.Dock="Right" Content="Cancel" Width="90" Height="30" Margin="8,0,0,0" IsCancel="True"/>
+        <Button DockPanel.Dock="Right" Content="Save" Width="90" Height="30" IsDefault="True" Click="BtnSave_Click"
+                Style="{StaticResource AccentButton}"/>
+      </DockPanel>
+    </Border>
+
+    <TabControl x:Name="tabs" Margin="10"/>
+  </DockPanel>
+</Window>

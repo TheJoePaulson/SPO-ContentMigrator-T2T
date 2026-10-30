@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+
+    <AssemblyName>ContentMigrator-T2T-CE</AssemblyName>
+    <RootNamespace>ContentMigrator</RootNamespace>
+    <Product>Content Migrator T2T - Community Edition</Product>
+    <AssemblyTitle>Content Migrator T2T - Community Edition</AssemblyTitle>
+    <Description>SharePoint Online list and library migration utility (Community Edition).</Description>
+    <Authors>Joe Paulson</Authors>
+    <Version>1.1.0</Version>
+    <ApplicationIcon>Resources\AppIcon.ico</ApplicationIcon>
+
+    <!-- Framework-dependent: target machines need the .NET 8 Desktop Runtime. -->
+    <SelfContained>false</SelfContained>
+    <!-- Lets the project restore/compile on a non-Windows build agent; harmless on Windows. -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Microsoft's SharePoint Online client object model (.NET Standard build). -->
+    <PackageReference Include="Microsoft.SharePointOnline.CSOM" Version="16.1.*" />
+    <!-- Microsoft Authentication Library: interactive Entra ID sign-in. -->
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Same .ico for the .exe (ApplicationIcon above) and the window title bar / taskbar. -->
+    <Resource Include="Resources\AppIcon.ico" />
+    <!-- 128 px frame of the icon for the banner (an .ico in an Image would use its 16 px frame). -->
+    <Resource Include="Resources\AppIcon.png" />
+    <!-- Reference copy only. The app writes appsettings.json next to the .exe on first run,
+         so a redeploy never overwrites an operator's saved settings. -->
+    <None Update="appsettings.sample.json" CopyToOutputDirectory="Never" />
+  </ItemGroup>
+
+</Project>
