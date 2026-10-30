@@ -5,7 +5,7 @@ from one Microsoft 365 tenant to another (**T2T**, tenant-to-tenant): inventory,
 metadata, CSV-driven runs, list item copy with attachments, retry from log, and
 "create from existing" / "modernize" for lists.
 
-![Content Migrator T2T - Main App Window](images/app-screenshot.png "Content Migrator T2T - Main App Window")
+![Content Migrator T2T - Main App Window](https://i.imgur.com/cra3sEB.png "Content Migrator T2T - Main App Window")
 
 Built on .NET 8 (WPF) with Microsoft's own libraries only:
 
