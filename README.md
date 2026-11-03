@@ -1,4 +1,13 @@
 # Content Migrator T2T - Community Edition
+![.NET 8](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&style=flat-square)
+![Windows](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&style=flat-square)
+![WPF](https://img.shields.io/badge/UI-WPF-5C2D91?style=flat-square)
+![SharePoint Online](https://img.shields.io/badge/SharePoint-Online-0078D4?logo=microsoftsharepoint&style=flat-square)
+![Tenant to Tenant](https://img.shields.io/badge/Migration-T2T-success?style=flat-square)
+![MSAL](https://img.shields.io/badge/Auth-MSAL-green?style=flat-square)
+![Microsoft Only](https://img.shields.io/badge/Dependencies-Microsoft_Only-blue?style=flat-square)
+![Community Edition](https://img.shields.io/badge/Edition-Community-success?style=flat-square)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
 
 A Windows desktop tool for SharePoint Online list and library migrations, within one tenant or
 from one Microsoft 365 tenant to another (**T2T**, tenant-to-tenant): inventory, copy and move with folder structure and
